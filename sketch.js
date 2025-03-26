@@ -1,3 +1,5 @@
+let started = false; // Variable de control
+
 let paddle;
 let bricks = [];
 let w, h;
@@ -123,6 +125,7 @@ function keyReleased() {
 }
 
 function draw() {
+  if (!started) return; // No ejecuta draw() hasta que el usuario haga clic
   
   let tiempo = millis() / 1000;  // Obtener el tiempo transcurrido en segundos
   
@@ -457,5 +460,12 @@ function createBricks(level) {
         bricks.push(new Brick(i * w + w / 2, j * h + h / 2 + 75, w, h, (2*(14-i)-1) % 8));
       }
     }
+  }
+}
+
+function mousePressed() {
+  if (!started) {
+    started = true; // Cambia el estado a iniciado
+    console.log("¡El usuario hizo clic! Iniciando...");
   }
 }
